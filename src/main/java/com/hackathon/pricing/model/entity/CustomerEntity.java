@@ -18,7 +18,8 @@ import java.util.Set;
 public class CustomerEntity {
 
     @Id
-    @Column(name = "customer_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial", name = "customer_id")
     private Long id;
 
     @Column(name = "name")
@@ -33,14 +34,12 @@ public class CustomerEntity {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(mappedBy="customer")
-    private Set<PhoneNumberEntity> phoneNumbers;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = { CascadeType.ALL})
+    @Builder.Default
+    private Set<PhoneNumberEntity> phoneNumbers = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "ticket_table",
-            joinColumns = { @JoinColumn(name = "customer_id") },
-            inverseJoinColumns = { @JoinColumn(name = "phone_id") }
-    )
-    Set<PhoneNumberEntity> phoneTickets = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = { CascadeType.ALL})
+    @Builder.Default
+    private Set<TicketEntity> tickets = new HashSet<>();
+
 }

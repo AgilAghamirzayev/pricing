@@ -1,6 +1,9 @@
 package com.hackathon.pricing.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -8,11 +11,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "phone_number_table")
 public class PhoneNumberEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "phone_id")
     private Long id;
 
@@ -22,19 +29,21 @@ public class PhoneNumberEntity {
     @Column(name = "price")
     private BigDecimal price;
 
-    @Column(name = "isSold")
+    @Column(name = "is_sold")
     private Boolean isSold;
 
-    @ManyToOne
+    @Column(name = "is_broned")
+    private Boolean isBroned;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="customer_id")
     private CustomerEntity customer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="branch_id")
     private BranchEntity branch;
 
-    @ManyToMany(mappedBy = "phoneTickets")
-    private Set<CustomerEntity> customerTickets = new HashSet<>();
-
-
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "phone")
+    @Builder.Default
+    private Set<TicketEntity> tickets = new HashSet<>();
 }

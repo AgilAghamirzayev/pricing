@@ -2,6 +2,8 @@ package com.hackathon.pricing.service.impl;
 
 import com.hackathon.pricing.model.entity.CustomerEntity;
 import com.hackathon.pricing.mapper.CustomerMapper;
+import com.hackathon.pricing.model.entity.PhoneNumberEntity;
+import com.hackathon.pricing.model.entity.TicketEntity;
 import com.hackathon.pricing.model.request.CustomerRequest;
 import com.hackathon.pricing.repo.CustomerRepo;
 import com.hackathon.pricing.service.CustomerService;
@@ -18,10 +20,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void buyPhoneNumber(CustomerRequest customerRequest) {
-        CustomerEntity savedCustomer = customerRepo.findByPin(customerRequest.getPin()).orElseGet(() -> {
-            CustomerEntity customerEntity = customerMapper.entityToDto(customerRequest);
-            return customerRepo.save(customerEntity);
-        });
-        phoneNumberService.buyPhoneNumber(savedCustomer, customerRequest.getPhoneNumberId());
+        CustomerEntity customerEntity = customerRepo.findByPin(customerRequest.getPin()).orElseGet(() ->
+            customerMapper.entityToDto(customerRequest)
+        );
+        PhoneNumberEntity phone = phoneNumberService.getPhoneById(customerRequest.getPhoneNumberId());
+        phone.setIsBroned(true);
+        customerEntity.getPhoneNumbers().add(phone);
+        customerRepo.save(customerEntity);
+        TicketEntity ticketEntity = TicketEntity.builder().customer(customerEntity).phone(phone).build();
     }
 }

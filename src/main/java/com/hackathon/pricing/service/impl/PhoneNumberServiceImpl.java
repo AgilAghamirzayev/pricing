@@ -22,8 +22,9 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     @Override
     public void buyPhoneNumber(CustomerEntity customerEntity, Long phoneNumberId) {
         PhoneNumberEntity phoneNumber = phoneNumberRepo.findById(phoneNumberId).orElseThrow(() -> new RecordNotFoundException("Phone number not found by id"));
-        phoneNumber.setIsSold(true);
+        phoneNumber.setIsBroned(true);
         phoneNumber.setCustomer(customerEntity);
+        phoneNumberRepo.save(phoneNumber);
     }
 
     @Override
@@ -33,6 +34,11 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
             throw new RecordNotFoundException("Phone number not found by pattern");
         }
         return phoneNumberMapper.entityToResponse(phoneNumberEntities);
+    }
+
+    @Override
+    public PhoneNumberEntity getPhoneById(Long phoneNumberId) {
+        return phoneNumberRepo.findById(phoneNumberId).orElseThrow(() -> new RecordNotFoundException("Phone number not found by id"));
     }
 
 
