@@ -4,6 +4,7 @@ import com.hackathon.pricing.exception.classes.RecordNotFoundException;
 import com.hackathon.pricing.mapper.PhoneNumberMapper;
 import com.hackathon.pricing.model.entity.CustomerEntity;
 import com.hackathon.pricing.model.entity.PhoneNumberEntity;
+import com.hackathon.pricing.model.request.PhoneNumberRequest;
 import com.hackathon.pricing.model.response.PhoneNumberResponse;
 import com.hackathon.pricing.repo.PhoneNumberRepo;
 import com.hackathon.pricing.service.PhoneNumberService;
@@ -20,11 +21,11 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     private final PhoneNumberMapper phoneNumberMapper;
 
     @Override
-    public void buyPhoneNumber(CustomerEntity customerEntity, Long phoneNumberId) {
+    public PhoneNumberEntity buyPhoneNumber(CustomerEntity customerEntity, Long phoneNumberId) {
         PhoneNumberEntity phoneNumber = phoneNumberRepo.findById(phoneNumberId).orElseThrow(() -> new RecordNotFoundException("Phone number not found by id"));
         phoneNumber.setIsBroned(true);
         phoneNumber.setCustomer(customerEntity);
-        phoneNumberRepo.save(phoneNumber);
+        return phoneNumberRepo.save(phoneNumber);
     }
 
     @Override
@@ -39,6 +40,11 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     @Override
     public PhoneNumberEntity getPhoneById(Long phoneNumberId) {
         return phoneNumberRepo.findById(phoneNumberId).orElseThrow(() -> new RecordNotFoundException("Phone number not found by id"));
+    }
+
+    @Override
+    public void savePhoneNumbers(List<PhoneNumberRequest> requestList) {
+        phoneNumberRepo.saveAll(phoneNumberMapper.requestToEntity(requestList));
     }
 
 

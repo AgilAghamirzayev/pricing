@@ -38,7 +38,7 @@ public class CustomerEntity {
     @Builder.Default
     private Set<PhoneNumberEntity> phoneNumbers = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = { CascadeType.ALL})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
     @Builder.Default
     private Set<TicketEntity> tickets = new HashSet<>();
 

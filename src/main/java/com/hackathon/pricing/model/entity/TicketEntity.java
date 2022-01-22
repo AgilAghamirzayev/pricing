@@ -27,4 +27,10 @@ public class TicketEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="phone_id")
     private PhoneNumberEntity phone;
+
+    @Column(name = "is_expired")
+    private boolean isExpired;
+
+    @Column(name = "is_completed")
+    private boolean isCompleted;
 }

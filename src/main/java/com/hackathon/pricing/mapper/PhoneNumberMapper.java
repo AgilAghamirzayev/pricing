@@ -1,6 +1,7 @@
 package com.hackathon.pricing.mapper;
 
 import com.hackathon.pricing.model.entity.PhoneNumberEntity;
+import com.hackathon.pricing.model.request.PhoneNumberRequest;
 import com.hackathon.pricing.model.response.PhoneNumberResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -15,5 +16,8 @@ import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = IGNORE)
 public interface PhoneNumberMapper {
+
     List<PhoneNumberResponse> entityToResponse(List<PhoneNumberEntity> phoneNumberEntity);
+
+    List<PhoneNumberEntity> requestToEntity(List<PhoneNumberRequest> phoneNumberRequestList);
 }
