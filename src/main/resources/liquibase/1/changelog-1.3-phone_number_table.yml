@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create phone_number_table table
+      author: Ayshan Rzayeva
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: phone_id
+                  type: number
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: number
+                  constraints:
+                    foreignKeyName: fk_customer_id
+                    references: customer_table(customer_id)
+              - column:
+                  name: branch_id
+                  type: number
+                  constraints:
+                    foreignKeyName: fk_branch_id
+                    references: branch_table(branch_id)
+              - column:
+                  name: number
+                  type: varchar2(255)
+              - column:
+                  name: price
+                  type: number
+              - column:
+                  name: isSold
+                  type: varchar2(2)
+              - column:
+                  name: isBroned
+                  type: varchar2(2)
+            tableName: phone_number_table
+
+  - changeSet:
+      id: Create phone_number_table sequence
+      author: Ayshan Rzayeva
+      changes:
+        - createSequence:
+            minValue: 1
+            cycle: true
+            maxValue: 99999999
+            sequenceName: sqs_phone_number_table
+            incrementBy: 1
+            startValue: 1

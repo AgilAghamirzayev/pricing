@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: Add unique constraint
+      author: Ayshan Rzayeva
+      changes:
+        - addUniqueConstraint:
+            columnNames: pin
+            constraintName: unique_pin
+            tableName: customer_table
+            validate: true
