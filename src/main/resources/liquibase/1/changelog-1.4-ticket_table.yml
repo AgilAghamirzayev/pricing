@@ -26,6 +26,9 @@ databaseChangeLog:
               - column:
                   name: is_expired
                   type: boolean
+              - column:
+                  name: is_completed
+                  type: boolean
             tableName: ticket_table
 
 
