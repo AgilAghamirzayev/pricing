@@ -10,25 +10,27 @@ databaseChangeLog:
                   type: serial
                   constraints:
                     primaryKey: true
-                    nullable: false
               - column:
                   name: phone_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_phone_number_id
-                    references: phone_number_table(phone_id)
+                    nullable: false
               - column:
                   name: customer_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_customer_id
-                    references: customer_table(customer_id)
+                    nullable: false
               - column:
                   name: is_expired
                   type: boolean
               - column:
                   name: is_completed
                   type: boolean
+              - column:
+                  name: created_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
             tableName: ticket_table
 
 
