@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PhoneNumberRepo extends JpaRepository<PhoneNumberEntity, Long> {
-    List<PhoneNumberEntity> findAllByNumberLikeAndIsSoldFalse(String pattern);
+    List<PhoneNumberEntity> findAllByNumberLike(String pattern);
 }

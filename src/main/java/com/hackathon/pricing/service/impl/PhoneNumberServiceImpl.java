@@ -13,10 +13,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static java.lang.Boolean.TRUE;
 
 @Slf4j
 @Service
@@ -39,7 +39,8 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
 
     @Override
     public List<PhoneNumberResponse> findAllByPattern(String pattern) {
-        List<PhoneNumberEntity> phoneNumberEntities = phoneNumberRepo.findAllByNumberLikeAndIsSoldFalse(pattern);
+        List<PhoneNumberEntity> phoneNumberEntities = phoneNumberRepo.findAllByNumberLike(pattern).stream()
+                .filter(num -> !TRUE.equals(num.getIsBroned()) && !TRUE.equals(num.getIsSold())).collect(Collectors.toList());
         if (phoneNumberEntities.isEmpty()) {
             throw new RecordNotFoundException("Phone number not found by pattern");
         }
