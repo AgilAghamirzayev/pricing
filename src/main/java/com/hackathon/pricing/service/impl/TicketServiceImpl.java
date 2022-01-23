@@ -38,7 +38,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public void expireTicket(Long ticketId) {
+    public void expiryTicket(Long ticketId) {
         ticketRepo.findById(ticketId).ifPresentOrElse(entity -> {
             entity.setExpired(true);
             TicketEntity ticketEntity = ticketRepo.save(entity);

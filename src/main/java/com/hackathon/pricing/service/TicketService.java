@@ -10,5 +10,5 @@ public interface TicketService {
 
     void completeTicket(Long ticketId);
 
-    void expireTicket(Long ticketId);
+    void expiryTicket(Long ticketId);
 }
