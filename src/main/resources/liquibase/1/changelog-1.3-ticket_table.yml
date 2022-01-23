@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create ticket_table table
+      author: Ayshan Rzayeva
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: ticket_id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: phone_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_expired
+                  type: boolean
+              - column:
+                  name: is_completed
+                  type: boolean
+              - column:
+                  name: created_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+            tableName: ticket_table
+
+

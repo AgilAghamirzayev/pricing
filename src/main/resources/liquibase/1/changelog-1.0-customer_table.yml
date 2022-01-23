@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create customer_table table
+      author: Ayshan Rzayeva
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: customer_id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar2(255)
+              - column:
+                  name: surname
+                  type: varchar2(255)
+              - column:
+                  name: pin
+                  type: varchar2(255)
+              - column:
+                  name: email
+                  type: varchar2(255)
+            tableName: customer_table
+
+#  - changeSet:
+#      id: Create customer_table sequence
+#      author: Ayshan Rzayeva
+#      changes:
+#        - createSequence:
+#            minValue: 1
+#            cycle: true
+#            maxValue: 99999999
+#            sequenceName: sqs_customer_table
+#            incrementBy: 1
+#            startValue: 1
+

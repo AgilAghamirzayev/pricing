@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create branch_table table
+      author: Ayshan Rzayeva
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: branch_id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: address
+                  type: varchar2(255)
+            tableName: branch_table
+
+#  - changeSet:
+#      id: Create branch_table sequence
+#      author: Ayshan Rzayeva
+#      changes:
+#        - createSequence:
+#            minValue: 1
+#            cycle: true
+#            maxValue: 99999999
+#            sequenceName: sqs_branch_table
+#            incrementBy: 1
+#            startValue: 1
+
