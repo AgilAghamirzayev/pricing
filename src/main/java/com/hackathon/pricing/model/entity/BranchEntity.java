@@ -24,8 +24,4 @@ public class BranchEntity {
 
     @Column(name = "address")
     private String address;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "branch")
-    @Builder.Default
-    private Set<PhoneNumberEntity> phoneNumbers = new HashSet<>();
 }

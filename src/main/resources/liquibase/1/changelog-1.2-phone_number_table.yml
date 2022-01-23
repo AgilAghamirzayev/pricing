@@ -13,16 +13,9 @@ databaseChangeLog:
               - column:
                   name: customer_id
                   type: bigint
-                  constraints:
-                    foreignKeyName: fk_customer_id
-                    references: customer_table(customer_id)
-                    nullable: true
               - column:
                   name: branch_id
                   type: bigint
-                  constraints:
-                    foreignKeyName: fk_branch_id
-                    references: branch_table(branch_id)
               - column:
                   name: number
                   type: varchar2(255)

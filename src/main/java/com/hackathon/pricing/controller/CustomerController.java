@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/phone")
+@RequestMapping("/customer")
 public class CustomerController {
 
     private final CustomerService customerService;
 
-    @PostMapping("/buy")
-    public ResponseEntity<RestResponse<Object>> buyPhoneNumber(@RequestBody CustomerRequest customerRequest) {
-        customerService.buyPhoneNumber(customerRequest);
+    @PostMapping("/brone")
+    public ResponseEntity<RestResponse<Object>> bronePhoneNumber(@RequestBody CustomerRequest customerRequest) {
+        customerService.bronePhoneNumber(customerRequest);
         return ResponseEntity.ok(RestResponse.of(null));
     }
 }

@@ -6,7 +6,9 @@ import com.hackathon.pricing.model.request.TicketRequest;
 
 public interface TicketService {
 
-    void saveTicket(CustomerEntity customerEntity, PhoneNumberEntity phoneNumberEntity);
+    void saveTicket(Long customerId, Long phoneId);
 
-    void updateTicket(Long ticketId, TicketRequest ticketRequest);
+    void completeTicket(Long ticketId);
+
+    void expireTicket(Long ticketId);
 }

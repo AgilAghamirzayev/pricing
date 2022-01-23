@@ -1,11 +1,11 @@
 package com.hackathon.pricing.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -20,17 +20,19 @@ public class TicketEntity {
     @Column(name = "ticket_id")
     private Long ticketId;
 
-    @ManyToOne
-    @JoinColumn(name="customer_id")
-    private CustomerEntity customer;
+    @Column(name="customer_id")
+    private Long customerId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="phone_id")
-    private PhoneNumberEntity phone;
+    @Column(name="phone_id")
+    private Long phoneId;
 
     @Column(name = "is_expired")
     private boolean isExpired;
 
     @Column(name = "is_completed")
     private boolean isCompleted;
+
+    @Column(name = "created_date")
+    @Builder.Default
+    private LocalDateTime createdDate = LocalDateTime.now();
 }

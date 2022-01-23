@@ -3,6 +3,7 @@ package com.hackathon.pricing.exception;
 import com.hackathon.pricing.exception.classes.RecordNotFoundException;
 import com.hackathon.pricing.model.shared.ErrorResponse;
 import lombok.CustomLog;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
@@ -24,8 +25,8 @@ import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.*;
 
+@Slf4j
 @RestControllerAdvice
-@CustomLog
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     public static final String VALIDATION_FAILED_MSG = "Validation failed!";
